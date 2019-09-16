@@ -1,0 +1,1 @@
+<?xml version="1.0"?><!--First Comment XmlTextWriter Sample Example--><!--myXmlFile.xml in root dir--><Student><Name>Student</Name><Address>Colony</Address><Char>arc</Char><users><user age="42">John Doe</user><user age="39">Jane Doe</user></users></Student>
