@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TECHNETModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Articoli">
+    <Key>
+      <PropertyRef Name="IdArticolo" />
+    </Key>
+    <Property Name="IdArticolo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CodArt" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DesArt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CodFamiglia" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Famiglie" Relationship="TECHNETModel.fk_Articoli_Famiglie" FromRole="Articoli" ToRole="Famiglie" />
+  </EntityType>
+  <EntityType Name="Famiglie">
+    <Key>
+      <PropertyRef Name="CodFamiglia" />
+    </Key>
+    <Property Name="CodFamiglia" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DesFamiglia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Articolis" Relationship="TECHNETModel.fk_Articoli_Famiglie" FromRole="Famiglie" ToRole="Articoli" />
+  </EntityType>
+  <EntityContainer Name="TECHNETEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Articolis" EntityType="Self.Articoli" />
+    <EntitySet Name="Famiglies" EntityType="Self.Famiglie" />
+    <AssociationSet Name="fk_Articoli_Famiglie" Association="TECHNETModel.fk_Articoli_Famiglie">
+      <End Role="Famiglie" EntitySet="Famiglies" />
+      <End Role="Articoli" EntitySet="Articolis" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="fk_Articoli_Famiglie">
+    <End Type="TECHNETModel.Famiglie" Role="Famiglie" Multiplicity="1" />
+    <End Type="TECHNETModel.Articoli" Role="Articoli" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Famiglie">
+        <PropertyRef Name="CodFamiglia" />
+      </Principal>
+      <Dependent Role="Articoli">
+        <PropertyRef Name="CodFamiglia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

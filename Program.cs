@@ -14,6 +14,51 @@ namespace ConsoleApp1
         [STAThread]
         static void Main(string[] args)
         {
+            using (TECHNETEntities db = new TECHNETEntities())
+            {
+                //---- below is used for database-first----
+                //---- remove folder 'Migrations' to run following codes
+                //---- folder 'Migrations' is generated when using Code-first paradism.
+                //---- reference: https://www.c-sharpcorner.com/article/entity-framework-introduction-using-c-sharp-part-one/
+
+                //// simple test
+                //Articoli art = db
+                //    .Articolis.Where((x) => x.CodArt == "ART001")
+                //    .FirstOrDefault();
+
+
+                //Console.WriteLine(art.DesArt);
+
+
+                //// test joining two tables
+                //var art = db.Articolis
+                //.Join(db.Famiglies,
+                //      articolo => articolo.CodFamiglia,
+                //      famiglia => famiglia.CodFamiglia,
+                //      (articolo, famiglia) => new { Articoli = articolo, Famiglie = famiglia })
+                //.Where((x) => x.Articoli.CodArt == "ART005")
+                //.FirstOrDefault();
+
+                //Console.WriteLine(art.Articoli.DesArt + " - " + art.Famiglie.DesFamiglia);
+
+
+                //// test after adding relation between two tables
+                //Articoli art = db.Articolis.Where((x) => x.CodArt == "ART005").FirstOrDefault();
+
+                //Console.WriteLine(art.DesArt + " - " + art.Famiglie.DesFamiglia);
+            }
+
+
+        }
+
+        static void TryEntityFramework()
+        {
+
+
+        }
+
+        static void TryClipboard()
+        {
             if (Clipboard.ContainsText())
             {
                 //var text = Clipboard.GetText();
@@ -37,14 +82,10 @@ namespace ConsoleApp1
                 //    Console.WriteLine(studentTest.Name);
                 //}
 
-            
+
 
             }
 
-
-            //ReadXml();
-            WriteXml_XmlTextWritter();
-            WriteXml_XmlDocument();
         }
 
         static void ReadXml()

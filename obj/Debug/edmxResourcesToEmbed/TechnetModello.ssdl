@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TECHNETModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Articoli">
+    <Key>
+      <PropertyRef Name="IdArticolo" />
+    </Key>
+    <Property Name="IdArticolo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CodArt" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="DesArt" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CodFamiglia" Type="nvarchar" MaxLength="6" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Famiglie">
+    <Key>
+      <PropertyRef Name="CodFamiglia" />
+    </Key>
+    <Property Name="CodFamiglia" Type="nvarchar" MaxLength="6" Nullable="false" />
+    <Property Name="DesFamiglia" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="fk_Articoli_Famiglie">
+    <End Role="Famiglie" Type="Self.Famiglie" Multiplicity="1" />
+    <End Role="Articoli" Type="Self.Articoli" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Famiglie">
+        <PropertyRef Name="CodFamiglia" />
+      </Principal>
+      <Dependent Role="Articoli">
+        <PropertyRef Name="CodFamiglia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TECHNETModelStoreContainer">
+    <EntitySet Name="Articoli" EntityType="Self.Articoli" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Famiglie" EntityType="Self.Famiglie" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="fk_Articoli_Famiglie" Association="Self.fk_Articoli_Famiglie">
+      <End Role="Famiglie" EntitySet="Famiglie" />
+      <End Role="Articoli" EntitySet="Articoli" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
